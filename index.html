@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Get URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const appClipUrl = urlParams.get('appClipUrl') || 'https://appclip.apple.com/id?p=org.curate.app.Clip';
-            const webUrl = urlParams.get('webUrl') || 'https://www.curated.menu/1/66188687b407b7704b6e7f52';
-
+        function handleRedirect(appClipUrl, webUrl) {
             // User agent detection
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
             var isIOS = /iPad|iPhone|iPod/.test(userAgent) && !/Macintosh/.test(userAgent);
@@ -21,16 +16,16 @@
             ) || false;
 
             if (isIOS && (isSafari || iOSVersion >= 17)) {
-                // Open the default app clip URL for iOS Safari users and iOS 17+ users in a new tab
-                window.open(appClipUrl, '_blank');
+                // Open the App Clip URL directly
+                window.location.href = appClipUrl;
             } else {
-                // Redirect to the web ordering platform for other users
+                // Open the web URL in the same tab
                 window.location.href = webUrl;
             }
-        });
+        }
     </script>
 </head>
 <body>
-    <p>Redirecting...</p>
+    <button onclick="handleRedirect('https://appclip.apple.com/id?p=org.curate.app.Clip', 'https://www.curated.menu/1/66188687b407b7704b6e7f52')">Order Now</button>
 </body>
 </html>
